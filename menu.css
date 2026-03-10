@@ -1,0 +1,65 @@
+/* Hover trigger zone at top of page - always accessible */
+.menu-trigger {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    z-index: 1001;
+    background: transparent;
+    pointer-events: auto;
+}
+
+.menu-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(26, 26, 26, 0.95);
+    border-bottom: 1px solid #444;
+    padding: 12px 20px;
+    z-index: 1002;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+    min-height: 80px;
+}
+
+.menu-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Show menu when hovering over trigger zone or menu itself */
+.menu-trigger:hover ~ .menu-bar,
+.menu-bar:hover {
+    transform: translateY(0);
+}
+
+.menu-bar a {
+    color: #4a9eff;
+    text-decoration: none;
+    padding: 4px 8px;
+    transition: all 0.2s;
+}
+
+.menu-bar a:hover {
+    color: #6bb6ff;
+    background: rgba(74, 158, 255, 0.1);
+}
+
+.menu-bar a.active {
+    color: #fff;
+    background: rgba(74, 158, 255, 0.2);
+}
+
+.menu-bar .bracket {
+    color: #666;
+    user-select: none;
+}
+

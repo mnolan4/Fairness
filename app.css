@@ -1,0 +1,73 @@
+/* Layout */
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: #1a1a1a;
+    color: #e6e6e6;
+    font-family: Arial, sans-serif;
+}
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+#menu {
+    background: #121212;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 8px 12px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+#content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Menu */
+.menu {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.menu a {
+    color: #cfcfcf;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+.menu a.active {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+}
+.brand {
+    margin-right: 8px;
+    font-weight: bold;
+    color: #f0f0f0;
+}
+.spacer {
+    flex: 1;
+}
+.note {
+    opacity: 0.7;
+    font-size: 12px;
+}
+
+/* Content text */
+.page {
+    padding: 16px;
+}
+.page h1 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+}
+.page p {
+    margin: 8px 0;
+    color: #c7c7c7;
+}
+
+
