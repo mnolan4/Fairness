@@ -1,5 +1,7 @@
 # Self-Organizing Fairness Ecosystem
 
+**Live site:** [https://mnolan4.github.io/Fairness/](https://mnolan4.github.io/Fairness/)
+
 An interactive visualization platform exploring how autonomous agents can self-organize into fair systems through local interactions and micro-fairness corrections. This project demonstrates nineteen different models of fairness, each revealing how fairness principles manifest at different scales and through different mechanisms.
 
 ## 🌟 Overview
@@ -223,9 +225,11 @@ Inspired by arXiv:2512.21593. A coarse prior (e.g., low-resolution fairness) is 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/mnolan4/Fairness-Models.git
-cd Fairness-Models
+git clone https://github.com/mnolan4/Fairness.git
+cd Fairness
 ```
+
+Or open the live site at [https://mnolan4.github.io/Fairness/](https://mnolan4.github.io/Fairness/).
 
 2. Start a local web server:
 
