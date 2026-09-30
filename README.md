@@ -1,18 +1,24 @@
-# Self-Organizing Fairness Ecosystem
+# AE Labs
+
+**Algorithmic Ecologies Laboratory**
+
+*Interactive models of emergence, allocation, adaptation, and collective behavior.*
 
 **Live site:** [https://mnolan4.github.io/Fairness/](https://mnolan4.github.io/Fairness/)
 
-An interactive visualization platform exploring how autonomous agents can self-organize into fair systems through local interactions and micro-fairness corrections. This project demonstrates nineteen different models of fairness, each revealing how fairness principles manifest at different scales and through different mechanisms.
+AE Labs is an evolving collection of interactive computational experiments exploring how simple rules, local interactions, constraints, and feedback produce complex collective behavior. The project began as an exploration of computational fairness and has expanded into a broader study of emergent systems, allocation, adaptation, and collective dynamics.
+
+Fairness Systems remains the origin and first major research thread. The original model names are kept as a record of that genealogy.
 
 ## 🌟 Overview
 
-This project visualizes how fairness emerges from decentralized interactions. Each agent operates with its own utility and weight, continuously adjusting its behavior based on the fairness of its immediate neighborhood. Through these local interactions, global patterns of fairness emerge without central coordination.
+AE Labs explores how local rules, constraints, incentives, and flows produce larger patterns of collective behavior — across fairness and inequality, allocation, redistribution, adaptation, equilibrium, cooperation, competition, segregation, consensus, information flow, stochastic processes, diffusion, networks, ecological dynamics, game theory, and multi-agent systems.
 
-**Core Principle:** Fairness is not a static state but a dynamic equilibrium achieved through continuous local adjustments. When agents are sensitive to fairness in their immediate environment and act to correct imbalances, the system naturally evolves toward greater equity.
+**Core Principle:** Complex collective outcomes can arise from simple local rules. Fairness is one important lens: not a static state, but a dynamic equilibrium achieved through continuous local adjustments.
 
 ## 🎯 Features
 
-- **19 Interactive Fairness Models** - Explore different approaches to fairness
+- **19 Interactive Models** - Fairness, diffusion, networks, ecology, game theory, and related systems
 - **Real-time Visualizations** - Watch fairness patterns emerge dynamically
 - **Interactive Controls** - Adjust parameters and observe system behavior
 - **Comprehensive Metrics** - Track fairness coefficients, entropy, variance, and more

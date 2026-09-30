@@ -1,5 +1,7 @@
 # Self-Organizing Fairness Ecosystem: Research Summary and Development Plan
 
+This document describes the original Fairness Systems research thread, now hosted by **AE Labs (Algorithmic Ecologies Laboratory)**. Model names, mathematics, and experimental design below are preserved as the project genealogy; AE Labs frames this work as the first major strand within a broader study of algorithmic ecologies.
+
 ## Executive Summary
 
 This document provides a comprehensive overview of the Self-Organizing Fairness Ecosystem project, a computational platform exploring how autonomous agents can achieve fairness through decentralized, local interactions. The project implements nineteen distinct mathematical models of fairness, each demonstrating how global equity can emerge from simple, local rules without central coordination.

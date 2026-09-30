@@ -12,7 +12,7 @@
         nav.className = 'menu';
         const brand = document.createElement('span');
         brand.className = 'brand';
-        brand.textContent = 'Fairness Lab';
+        brand.textContent = 'AE Labs';
         nav.appendChild(brand);
         for (const l of links) {
             const a = document.createElement('a');
@@ -25,7 +25,7 @@
         nav.appendChild(spacer);
         const note = document.createElement('div');
         note.className = 'note';
-        note.textContent = 'Interactive models of self-organizing fairness';
+        note.textContent = 'Interactive models of emergence, allocation, adaptation, and collective behavior.';
         nav.appendChild(note);
         container.innerHTML = '';
         container.appendChild(nav);

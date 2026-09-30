@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Self-Organizing Fairness Ecosystem</title>
+    <title>AE Labs | Algorithmic Ecologies Laboratory</title>
+    <meta name="description" content="AE Labs is an interactive laboratory for exploring emergence, allocation, adaptation, fairness, diffusion, networks, and collective computational behavior.">
+    <meta property="og:title" content="AE Labs | Algorithmic Ecologies Laboratory">
+    <meta property="og:description" content="AE Labs is an interactive laboratory for exploring emergence, allocation, adaptation, fairness, diffusion, networks, and collective computational behavior.">
     <link rel="stylesheet" href="menu.css">
     <style>
         body {
@@ -20,11 +23,18 @@
         }
         h1 {
             color: #fff;
-            margin-bottom: 10px;
+            margin: 0 0 6px 0;
+            letter-spacing: 0.02em;
+        }
+        .lab-name {
+            color: #ccc;
+            margin: 0 0 10px 0;
+            font-size: 18px;
         }
         .subtitle {
             color: #aaa;
             margin-bottom: 12px;
+            font-style: italic;
         }
         .byline {
             color: #bbb;
@@ -39,14 +49,14 @@
         .description {
             color: #ccc;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             font-size: 15px;
         }
         .statement {
             background: #2a2a2a;
             border-left: 3px solid #4a9eff;
             padding: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 28px;
             color: #fff;
             font-style: italic;
             line-height: 1.6;
@@ -55,11 +65,31 @@
             color: #4a9eff;
             font-style: normal;
         }
+        .origin-note {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0 0 40px 0;
+        }
+        .family {
+            margin-top: 8px;
+            margin-bottom: 36px;
+        }
+        .family h2 {
+            margin: 0 0 6px 0;
+            font-size: 18px;
+            color: #fff;
+        }
+        .family-blurb {
+            margin: 0 0 16px 0;
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.5;
+        }
         .model-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-top: 30px;
         }
         .model-card {
             background: #2a2a2a;
@@ -75,14 +105,30 @@
             border-color: #666;
             transform: translateY(-2px);
         }
-        .model-card h2 {
+        .model-card h3 {
             margin: 0 0 10px 0;
             color: #4a9eff;
+            font-size: 20px;
         }
         .model-card p {
             margin: 0;
             color: #ccc;
             font-size: 14px;
+        }
+        .about {
+            margin-top: 20px;
+            padding-top: 28px;
+            border-top: 1px solid #333;
+        }
+        .about h2 {
+            margin: 0 0 14px 0;
+            font-size: 18px;
+        }
+        .about p {
+            color: #ccc;
+            line-height: 1.6;
+            font-size: 15px;
+            margin: 0 0 14px 0;
         }
     </style>
 </head>
@@ -91,7 +137,7 @@
     <nav class="menu-bar">
         <div class="menu-row">
             <span class="bracket">{</span>
-            <a href="index.html" class="active">HOME</a>
+            <a href="index.html" class="active">AE LABS</a>
             <span class="bracket">}</span>
             <span class="bracket">{</span>
             <a href="baseline.html">BASELINE</a>
@@ -157,117 +203,145 @@
         </div>
     </nav>
     <div class="container">
-        <h1>Self-Organizing Fairness Ecosystem</h1>
-        <p class="subtitle">Interactive visualizations of autonomous agents self-organizing through fairness principles</p>
+        <h1>AE Labs</h1>
+        <p class="lab-name">Algorithmic Ecologies Laboratory</p>
+        <p class="subtitle">Interactive models of emergence, allocation, adaptation, and collective behavior.</p>
         <p class="byline">Matt Nolan — Department of Computer Science, University of Maryland College Park</p>
         <p class="updated">Updated September, 2026</p>
-        
+
         <div class="description">
-            <p>This project explores how autonomous agents can self-organize into fair systems through local interactions and micro-fairness corrections. Each agent operates with its own utility and weight, continuously adjusting its behavior based on the fairness of its immediate neighborhood. Through these decentralized interactions, global patterns of fairness emerge without central coordination.</p>
-            
-            <p>The visualizations demonstrate nineteen different models of fairness: from standard fairness coefficients to weighted fairness systems, segregation patterns, market-based resource exchange, temporal memory models, thermodynamic energy redistribution, network influence dynamics, ecological resource-population feedback, quantum superposition symmetry, consensus voting dynamics, cooperative game theory coalitions, fairness diffusion ripples, stochastic Ito SDE processes, dual Itô fairness with forward and reverse diffusion, cytoneme-constrained diffusion with adaptive fairness control, advanced cytoneme circuitry with signal flow, coupled competitive diffusion, protein folding energy minimization, and residual prior diffusion (RPD) with coarse prior and residual refinement. Each model reveals how fairness principles manifest at different scales and through different mechanisms.</p>
+            <p>AE Labs is an evolving collection of interactive computational experiments exploring how simple rules, local interactions, constraints, and feedback produce complex collective behavior. The project began with models of computational fairness and now extends across diffusion, networks, stochastic systems, allocation, ecological dynamics, game theory, and autonomous agents.</p>
         </div>
-        
+
         <div class="statement">
-            <strong>Statement:</strong> Fairness is not a static state but a dynamic equilibrium achieved through continuous local adjustments. When agents are sensitive to fairness in their immediate environment and act to correct imbalances, the system naturally evolves toward greater equity. This emergent fairness demonstrates that complex, just systems can arise from simple, local rules.
+            <strong>Statement:</strong> AE Labs explores how local rules, constraints, incentives, and flows produce larger patterns of collective behavior. The project began as an exploration of computational fairness and has expanded into a broader study of emergent systems, allocation, adaptation, and collective dynamics.
         </div>
-        
-        <div class="model-grid">
-            <a href="baseline.html" class="model-card">
-                <h2>Baseline Model</h2>
-                <p>Standard fairness coefficient with full metrics and entropy tracking</p>
-            </a>
-            
-            <a href="weighted.html" class="model-card">
-                <h2>Weighted Fairness</h2>
-                <p>Emphasizes weighted fairness dynamics with adjustable weight distribution</p>
-            </a>
-            
-            <a href="segregation.html" class="model-card">
-                <h2>Segregation Analog</h2>
-                <p>Schelling-like model showing local segregation patterns with fairness overlays</p>
-            </a>
-            
-            <a href="market.html" class="model-card">
-                <h2>Market Exchange</h2>
-                <p>Resource exchange analog with trading dynamics and wealth distribution</p>
-            </a>
-            
-            <a href="temporal.html" class="model-card">
-                <h2>Temporal Fairness</h2>
-                <p>Memory-based model with glowing orbs and fading trails showing fairness memory</p>
-            </a>
-            
-            <a href="energy.html" class="model-card">
-                <h2>Energy Redistribution</h2>
-                <p>Thermodynamic analog with heat map visualization and temperature diffusion</p>
-            </a>
-            
-            <a href="network.html" class="model-card">
-                <h2>Information Fairness</h2>
-                <p>Dynamic graph network where node brightness and edge thickness show influence</p>
-            </a>
-            
-            <a href="ecological.html" class="model-card">
-                <h2>Ecological Fairness</h2>
-                <p>Living terrain grid with resource-population feedback and sustainability</p>
-            </a>
-            
-            <a href="quantum.html" class="model-card">
-                <h2>Quantum Symmetry</h2>
-                <p>Probability clouds with JS divergence showing superposition fairness</p>
-            </a>
-            
-            <a href="consensus.html" class="model-card">
-                <h2>Consensus Fairness</h2>
-                <p>Opinion dynamics in 2D space with color blending toward consensus</p>
-            </a>
-            
-            <a href="coalitions.html" class="model-card">
-                <h2>Cooperative Game Theory</h2>
-                <p>Coalition formation with Shapley values and Nash bargaining solutions</p>
-            </a>
-            
-            <a href="diffusion.html" class="model-card">
-                <h2>Fairness Diffusion</h2>
-                <p>Continuous color field with ripple propagation showing fairness potential</p>
-            </a>
-            
-            <a href="stochastic.html" class="model-card">
-                <h2>Stochastic Ito SDE</h2>
-                <p>Particles flow through sinusoidal waves with Brownian motion jitter</p>
-            </a>
-            
-            <a href="ito.html" class="model-card">
-                <h2>Dual Itô Fairness</h2>
-                <p>Forward and reverse SDEs showing bias diffusion and fairness correction equilibrium</p>
-            </a>
-            
-            <a href="cytoneme.html" class="model-card">
-                <h2>Cytoneme-Constrained Diffusion</h2>
-                <p>Directed graph conduits constrain resource diffusion with adaptive fairness control</p>
-            </a>
-            
-            <a href="cytoneme-circuitry.html" class="model-card">
-                <h2>Advanced Cytoneme Circuitry</h2>
-                <p>Fair signal flow through fixed networks with organic circuitry visualization</p>
-            </a>
-            
-            <a href="coupled.html" class="model-card">
-                <h2>Coupled Diffusion</h2>
-                <p>Two competitive particle populations with coupled SDEs pushing each other apart</p>
-            </a>
-            
-            <a href="protein.html" class="model-card">
-                <h2>Protein Folding Fairness</h2>
-                <p>Chain of agents fold to minimize unfairness energy like proteins finding native structure</p>
-            </a>
-            
-            <a href="rpd.html" class="model-card">
-                <h2>Residual Prior Diffusion (RPD)</h2>
-                <p>Two-stage fairness: coarse prior captures large-scale structure; diffusion refines the residual toward target (arXiv:2512.21593v1)</p>
-            </a>
-        </div>
+
+        <p class="origin-note">Fairness Systems remains the origin and first major research thread: early and ongoing experiments exploring equality, distribution, parity, bias, and corrective dynamics. The original model names are kept as a record of that genealogy.</p>
+
+        <section class="family" id="models">
+            <h2>Distribution &amp; Fairness</h2>
+            <p class="family-blurb">Early and ongoing experiments exploring equality, distribution, parity, bias, and corrective dynamics.</p>
+            <div class="model-grid">
+                <a href="baseline.html" class="model-card">
+                    <h3>Baseline Model</h3>
+                    <p>Standard fairness coefficient with full metrics and entropy tracking</p>
+                </a>
+                <a href="weighted.html" class="model-card">
+                    <h3>Weighted Fairness</h3>
+                    <p>Emphasizes weighted fairness dynamics with adjustable weight distribution</p>
+                </a>
+                <a href="market.html" class="model-card">
+                    <h3>Market Exchange</h3>
+                    <p>Resource exchange analog with trading dynamics and wealth distribution</p>
+                </a>
+                <a href="temporal.html" class="model-card">
+                    <h3>Temporal Fairness</h3>
+                    <p>Memory-based model with glowing orbs and fading trails showing fairness memory</p>
+                </a>
+                <a href="coalitions.html" class="model-card">
+                    <h3>Cooperative Game Theory</h3>
+                    <p>Coalition formation with Shapley values and Nash bargaining solutions</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="family">
+            <h2>Emergence &amp; Collective Behavior</h2>
+            <p class="family-blurb">How local preferences, influence, and interaction produce group-level structure.</p>
+            <div class="model-grid">
+                <a href="segregation.html" class="model-card">
+                    <h3>Segregation Analog</h3>
+                    <p>Schelling-like model showing local segregation patterns with fairness overlays</p>
+                </a>
+                <a href="consensus.html" class="model-card">
+                    <h3>Consensus Fairness</h3>
+                    <p>Opinion dynamics in 2D space with color blending toward consensus</p>
+                </a>
+                <a href="ecological.html" class="model-card">
+                    <h3>Ecological Fairness</h3>
+                    <p>Living terrain grid with resource-population feedback and sustainability</p>
+                </a>
+                <a href="protein.html" class="model-card">
+                    <h3>Protein Folding Fairness</h3>
+                    <p>Chain of agents fold to minimize unfairness energy like proteins finding native structure</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="family">
+            <h2>Diffusion &amp; Stochastic Systems</h2>
+            <p class="family-blurb">Flows, noise, and correction across space and time.</p>
+            <div class="model-grid">
+                <a href="diffusion.html" class="model-card">
+                    <h3>Fairness Diffusion</h3>
+                    <p>Continuous color field with ripple propagation showing fairness potential</p>
+                </a>
+                <a href="stochastic.html" class="model-card">
+                    <h3>Stochastic Ito SDE</h3>
+                    <p>Particles flow through sinusoidal waves with Brownian motion jitter</p>
+                </a>
+                <a href="ito.html" class="model-card">
+                    <h3>Dual Itô Fairness</h3>
+                    <p>Forward and reverse SDEs showing bias diffusion and fairness correction equilibrium</p>
+                </a>
+                <a href="coupled.html" class="model-card">
+                    <h3>Coupled Diffusion</h3>
+                    <p>Two competitive particle populations with coupled SDEs pushing each other apart</p>
+                </a>
+                <a href="rpd.html" class="model-card">
+                    <h3>Residual Prior Diffusion (RPD)</h3>
+                    <p>Two-stage fairness: coarse prior captures large-scale structure; diffusion refines the residual toward target (arXiv:2512.21593v1)</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="family">
+            <h2>Networks &amp; Information</h2>
+            <p class="family-blurb">Influence, conduits, and the routing of signals through structure.</p>
+            <div class="model-grid">
+                <a href="network.html" class="model-card">
+                    <h3>Information Fairness</h3>
+                    <p>Dynamic graph network where node brightness and edge thickness show influence</p>
+                </a>
+                <a href="cytoneme.html" class="model-card">
+                    <h3>Cytoneme-Constrained Diffusion</h3>
+                    <p>Directed graph conduits constrain resource diffusion with adaptive fairness control</p>
+                </a>
+                <a href="cytoneme-circuitry.html" class="model-card">
+                    <h3>Advanced Cytoneme Circuitry</h3>
+                    <p>Fair signal flow through fixed networks with organic circuitry visualization</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="family">
+            <h2>Energy &amp; Physical Analogies</h2>
+            <p class="family-blurb">Physical metaphors for redistribution, equilibrium, and symmetry.</p>
+            <div class="model-grid">
+                <a href="energy.html" class="model-card">
+                    <h3>Energy Redistribution</h3>
+                    <p>Thermodynamic analog with heat map visualization and temperature diffusion</p>
+                </a>
+                <a href="quantum.html" class="model-card">
+                    <h3>Quantum Symmetry</h3>
+                    <p>Probability clouds with JS divergence showing superposition fairness</p>
+                </a>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <h2>About</h2>
+            <p>AE Labs began as a series of interactive models exploring computational fairness. As the project developed, those experiments increasingly intersected with broader questions in dynamical systems, agent behavior, diffusion, networks, game theory, ecology, and collective decision-making.</p>
+            <p>Algorithmic Ecologies describes this expanded territory: computational environments in which agents, resources, information, constraints, and rules interact over time to produce emergent outcomes.</p>
+            <p>Fairness remains an important research thread within AE Labs, but it now sits alongside questions of equilibrium, resilience, cooperation, competition, adaptation, and systemic change. The laboratory is built so later work — including allocation, multi-agent learning, causal systems, flow matching, social choice, and artificial life — can join the same collection without replacing the original models.</p>
+        </section>
+
+        <footer class="ae-footer">
+            <p><strong>AE Labs</strong> — Algorithmic Ecologies Laboratory</p>
+            <p class="ae-footer-tag">Interactive models of emergence, allocation, adaptation, and collective behavior.</p>
+        </footer>
     </div>
+    <script src="brand.js"></script>
 </body>
 </html>
