@@ -14,6 +14,27 @@
         document.head.appendChild(meta);
     }
 
+    function ensureNavLink(href, label) {
+        var nav = document.querySelector('.menu-bar');
+        if (!nav || nav.querySelector('a[href="' + href + '"]')) return;
+        var home = nav.querySelector('.menu-row a[href="index.html"]');
+        if (!home) return;
+        var after = home.nextElementSibling;
+        var insertAfter = (after && after.classList && after.classList.contains('bracket')) ? after : home;
+        var b1 = document.createElement('span');
+        b1.className = 'bracket';
+        b1.textContent = '{';
+        var a = document.createElement('a');
+        a.href = href;
+        a.textContent = label;
+        var path = (location.pathname.split('/').pop() || 'index.html');
+        if (path === href) a.className = 'active';
+        var b2 = document.createElement('span');
+        b2.className = 'bracket';
+        b2.textContent = '}';
+        insertAfter.after(b1, a, b2);
+    }
+
     function updateNav() {
         var nav = document.querySelector('.menu-bar');
         if (!nav) return;
@@ -24,6 +45,7 @@
                 links[i].textContent = 'AE LABS';
             }
         }
+        ensureNavLink('tubular.html', 'TUBULIN');
     }
 
     function injectFamily() {
