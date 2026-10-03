@@ -63,7 +63,7 @@ class UnionFind {
 
 function setup() {
   createCanvas(CANVAS_W, CANVAS_H);
-  pixelDensity(1);
+  pixelDensity(min(2, window.devicePixelRatio || 1));
   textFont("Arial");
   createControls();
   newGraph();
