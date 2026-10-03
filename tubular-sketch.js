@@ -168,7 +168,7 @@ function drawTitle() {
   textStyle(NORMAL);
   fill(210, 10, 62);
   textSize(11);
-  text('Reduced response model · bulk kinetics are scientific core · local correction is optional', 246, 57);
+  text('Reduced response model · local rules, shared substrate, collective morphology', 246, 57);
 }
 
 function drawPanels() {
@@ -200,10 +200,10 @@ function drawControlLabels() {
 
   fill(190, 16, 84);
   textStyle(BOLD);
-  text('OPTIONAL FAIRNESS ANALYSIS', 18, 289);
+  text('ALGORITHMIC ECOLOGY', 18, 289);
   textStyle(NORMAL);
-  drawLabel('Local environmental heterogeneity', heterogeneitySlider.value().toFixed(2), 316);
-  drawLabel('Corrective attachment feedback', correctionSlider.value().toFixed(2), 359);
+  drawLabel('Local environment heterogeneity', heterogeneitySlider.value().toFixed(2), 316);
+  drawLabel('Adaptive tip feedback', correctionSlider.value().toFixed(2), 359);
 
   fill(36, 55, 88);
   textStyle(BOLD);
@@ -510,11 +510,13 @@ function drawMetrics() {
 
   fill(190, 15, 86);
   textStyle(BOLD);
-  text('OPTIONAL DISPARITY ANALYSIS', panel.x + 15, y);
+  text('ALGORITHMIC ECOLOGY METRICS', panel.x + 15, y);
   textStyle(NORMAL);
   y += 27;
   y = metricLine('Tip roughness', `${metrics.roughnessNm.toFixed(1)} nm`, y);
   y = metricLine('Tip spread', `${metrics.tipSpreadDimers} dimers`, y);
+  y = metricGauge('Tip-profile Gini', metrics.tipProfileGini, y, 185);
+  y = metricGauge('Tip-profile Jain', metrics.tipProfileJain, y, 42);
   y = metricLine('Attachment hazard CV', metrics.attachmentHazardDispersion.toFixed(3), y);
   y = metricLine('Detachment hazard CV', metrics.detachmentHazardDispersion.toFixed(3), y);
 
@@ -522,7 +524,7 @@ function drawMetrics() {
   textSize(9);
   textLeading(13);
   text(
-    'No composite fairness score. Disparity metrics describe protofilament geometry and local rate differences only.',
+    'Gini and Jain use tip extension above the shortest protofilament. Read them with absolute roughness and growth.',
     panel.x + 15,
     y + 12,
     panel.w - 30
@@ -553,23 +555,22 @@ function drawInfoBox() {
   const box = { x: 258, y: 90, w: 480, h: 620 };
   const close = { x: box.x + box.w - 34, y: box.y + 12, size: 20 };
   const content = [
-    { heading: 'PHYSICAL MODEL FIRST' },
-    { text: 'The radical-pair gate changes bulk microtubule growth. A global isotope or field effect is not itself fair or unfair. The default model has no fairness-seeking force.' },
-    { heading: 'MEANINGFUL COMPARISON UNITS' },
-    { text: 'The 13 protofilaments are comparison units because they draw from the same free-tubulin pool and jointly form one tube. Tubulin dimers are shared resources or events, not agents with welfare or preferences.' },
-    { heading: 'THREE DISTINCT SOURCES OF DISPARITY' },
-    { bullet: 'Random disparity: unequal tip lengths from identical stochastic rules.' },
-    { bullet: 'Structural disparity: persistent rate differences caused by local environments. Use the heterogeneity control to explore this.' },
-    { bullet: 'Corrective dynamics: an artificial attachment bias toward shorter protofilaments. This is an AE Labs intervention, not an established microtubule mechanism.' },
+    { heading: 'PHYSICAL CORE' },
+    { text: 'A reduced radical-pair response changes bulk attachment and detachment kinetics. The model remains a qualitative bridge between spin dynamics and polymerization.' },
+    { heading: 'ECOLOGICAL UNITS AND FLOWS' },
+    { text: 'Thirteen protofilaments are local units drawing from a shared free-tubulin substrate. Their stochastic events combine into one tube geometry and a bulk polymerized concentration.' },
+    { heading: 'EMERGENCE FROM LOCAL RULES' },
+    { bullet: 'Noise creates unequal tip histories even when every protofilament follows identical rules.' },
+    { bullet: 'Environmental heterogeneity creates persistent differences in local transition opportunities.' },
+    { bullet: 'Adaptive tip feedback biases attachment toward shorter tips. It is an exploratory intervention, not an established microtubule mechanism.' },
     { heading: 'MOST RELEVANT METRICS' },
-    { bullet: 'Attachment and detachment hazard CV measure process-rate disparity.' },
-    { bullet: 'Tip roughness measures the absolute spread of protofilament ends in nanometres.' },
-    { bullet: 'Tip spread is a secondary extreme-value diagnostic.' },
-    { text: 'No composite fairness score is used. Jain, Gini, and length CV are poor primary measures here because the protofilaments share a large common length.' },
-    { heading: 'INTERPRET WITH PHYSICAL OUTCOMES' },
-    { text: 'Lower disparity is not automatically better. A tapered end can be natural. Compare roughness with polymerized concentration, growth velocity, and—when available—tube stability or lateral mismatch.' },
+    { bullet: 'Tip roughness and spread measure collective morphology in physical units.' },
+    { bullet: 'Tip-profile Gini and Jain indices show how protruding length is distributed above the shortest tip.' },
+    { bullet: 'Attachment and detachment hazard CV expose heterogeneity in the local process.' },
+    { heading: 'INTERPRET AS A METRIC ECOLOGY' },
+    { text: 'No single score defines a preferred state. Normalized indices can hide physical scale, so compare them with roughness, polymerized concentration, and growth velocity.' },
     { heading: 'VACUUM TERM' },
-    { text: 'Vacuum fluctuations are neither a resource nor a fairness correction. They contribute only to spontaneous-transition rates and are negligible beside molecular relaxation at the physical default.' }
+    { text: 'Vacuum fluctuations are not a resource or adaptive force. They contribute only to spontaneous-transition rates and are negligible beside molecular relaxation at the physical default.' }
   ];
 
   push();
@@ -583,11 +584,11 @@ function drawInfoBox() {
   textAlign(LEFT, TOP);
   textSize(17);
   textStyle(BOLD);
-  text('How fairness relates to this model', box.x + 18, box.y + 18);
+  text('Algorithmic Ecology of the Model', box.x + 18, box.y + 18);
   textStyle(NORMAL);
   textSize(10);
   fill(210, 8, 58);
-  text('Optional analytical lens · not a biological objective', box.x + 18, box.y + 43);
+  text('Local rules · shared flows · heterogeneity · feedback · emergence', box.x + 18, box.y + 43);
 
   let textY = box.y + 72;
   const textX = box.x + 18;
@@ -678,6 +679,26 @@ function metricLine(label, value, y) {
   fill(190, 25, 91);
   textAlign(RIGHT);
   text(value, PANEL.metrics.x + PANEL.metrics.w - 15, y);
+  textAlign(LEFT);
+  return y + 22;
+}
+
+function metricGauge(label, value, y, hue) {
+  const panel = PANEL.metrics;
+  const barX = panel.x + 120;
+  const barWidth = 58;
+  const bounded = constrain(value, 0, 1);
+  fill(210, 8, 61);
+  textSize(10);
+  textAlign(LEFT);
+  text(label, panel.x + 15, y);
+  fill(210, 10, 18);
+  rect(barX, y - 8, barWidth, 7, 3);
+  fill(hue, 65, 88);
+  rect(barX, y - 8, bounded * barWidth, 7, 3);
+  fill(190, 25, 91);
+  textAlign(RIGHT);
+  text(value.toFixed(3), panel.x + panel.w - 15, y);
   textAlign(LEFT);
   return y + 22;
 }

@@ -38,6 +38,30 @@
     return average > 0 ? standardDeviation(values) / average : 0;
   }
 
+  function giniCoefficient(values) {
+    const nonnegative = values.map(value => Math.max(value, 0));
+    const total = nonnegative.reduce((sum, value) => sum + value, 0);
+    if (!(total > 0)) return 0;
+    let pairwiseDifference = 0;
+    for (const left of nonnegative) {
+      for (const right of nonnegative) {
+        pairwiseDifference += Math.abs(left - right);
+      }
+    }
+    return pairwiseDifference / (2 * nonnegative.length * total);
+  }
+
+  function jainIndex(values) {
+    const nonnegative = values.map(value => Math.max(value, 0));
+    const total = nonnegative.reduce((sum, value) => sum + value, 0);
+    const squaredTotal = nonnegative.reduce(
+      (sum, value) => sum + value ** 2,
+      0
+    );
+    if (!(squaredTotal > 0)) return 1;
+    return total ** 2 / (nonnegative.length * squaredTotal);
+  }
+
   function createRng(seed) {
     let state = seed >>> 0;
     return function random() {
@@ -245,18 +269,23 @@
       appliedVacuumRate,
       appliedEmRate,
       hazards,
-      metrics: fairnessMetrics(state.lengths, hazards)
+      metrics: ecologyMetrics(state.lengths, hazards)
     };
     return state.last;
   }
 
-  function fairnessMetrics(lengths, hazards) {
+  function ecologyMetrics(lengths, hazards) {
     const roughnessDimers = standardDeviation(lengths);
+    const shortest = Math.min(...lengths);
+    const tipProfile = lengths.map(length => length - shortest);
     return {
       meanLengthDimers: mean(lengths),
       roughnessDimers,
       roughnessNm: roughnessDimers * DIMER_LENGTH_NM,
       tipSpreadDimers: Math.max(...lengths) - Math.min(...lengths),
+      lengthCoefficientOfVariation: coefficientOfVariation(lengths),
+      tipProfileGini: giniCoefficient(tipProfile),
+      tipProfileJain: jainIndex(tipProfile),
       attachmentHazardDispersion: coefficientOfVariation(hazards.attachment),
       detachmentHazardDispersion: coefficientOfVariation(hazards.detachment)
     };
@@ -276,8 +305,10 @@
     electromagneticBath,
     isotopeSpinWeight,
     tripletYieldRatio,
+    giniCoefficient,
+    jainIndex,
     createState,
-    fairnessMetrics,
+    ecologyMetrics,
     step
   };
 });
