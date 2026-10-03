@@ -124,8 +124,9 @@ function createControls() {
   damageButton = createButton("Cut cord");
   const buttons = [playButton, stepButton, resetButton, newButton, damageButton];
   buttons.forEach((button, i) => {
-    button.position(x + (i % 2) * 108, 442 + floor(i / 2) * 35);
-    button.size(i === 4 ? 102 : 100, 28);
+    const buttonY = i === 4 ? 526 : 442 + floor(i / 2) * 35;
+    button.position(x + (i % 2) * 108, buttonY);
+    button.size(i === 4 ? 102 : 100, i === 3 ? 40 : 28);
     styleButton(button);
   });
   playButton.mousePressed(togglePlay);
@@ -841,11 +842,11 @@ function drawControls() {
     rect(8, 365, 228, 33);
   }
   fill(156, 165, 145);
-  text("Click patches to assign S, then E.", 12, 558);
-  text("Cut cord tests worst single-edge damage.", 12, 575);
+  text("Click patches to assign S, then E.", 12, 572);
+  text("Cut cord tests worst single-edge damage.", 12, 589);
   const current = currentEdge ? `${currentEdge.a}–${currentEdge.b}` : "—";
-  text(`Current cord: ${current}`, 12, 604);
-  text(`Graph seed: ${graphSeed}`, 12, 620);
+  text(`Current cord: ${current}`, 12, 618);
+  text(`Graph seed: ${graphSeed}`, 12, 634);
 }
 
 function drawMetrics() {
