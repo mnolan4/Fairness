@@ -35,6 +35,7 @@ let graphSeed = 1;
 
 let modeSelect, nodeSlider, densitySlider, speedSlider;
 let layoutSelect, resistanceSlider, investmentSlider;
+let allToAllToggle;
 let playButton, stepButton, resetButton, newButton, damageButton;
 
 class UnionFind {
@@ -106,14 +107,24 @@ function createControls() {
   positionControl(investmentSlider, x, y += gap, 210);
   investmentSlider.changed(resetAlgorithm);
 
+  allToAllToggle = createCheckbox(" All-to-all candidate cords", false);
+  allToAllToggle.position(x, 405);
+  allToAllToggle.style("color", "#b5bea7");
+  allToAllToggle.style("font-size", "11px");
+  allToAllToggle.changed(() => {
+    if (allToAllToggle.checked()) densitySlider.attribute("disabled", "");
+    else densitySlider.removeAttribute("disabled");
+    newGraph();
+  });
+
   playButton = createButton("Grow");
   stepButton = createButton("Step");
   resetButton = createButton("Reset");
-  newButton = createButton("New graph");
+  newButton = createButton("Random seed");
   damageButton = createButton("Cut cord");
   const buttons = [playButton, stepButton, resetButton, newButton, damageButton];
   buttons.forEach((button, i) => {
-    button.position(x + (i % 2) * 108, 438 + floor(i / 2) * 35);
+    button.position(x + (i % 2) * 108, 442 + floor(i / 2) * 35);
     button.size(i === 4 ? 102 : 100, 28);
     styleButton(button);
   });
@@ -154,7 +165,7 @@ function updatePlayLabel() {
 }
 
 function newGraph() {
-  graphSeed = floor(random(1, 1000000000));
+  graphSeed = Math.floor(Math.random() * 999999999) + 1;
   randomSeed(graphSeed);
   noiseSeed(graphSeed);
   nodes = [];
@@ -203,6 +214,11 @@ function buildCandidateGraph() {
     }
   }
   all.sort((a, b) => a.length - b.length);
+
+  if (allToAllToggle && allToAllToggle.checked()) {
+    candidates = all;
+    return;
+  }
 
   const connector = new UnionFind(nodes.length);
   const required = [];
@@ -813,7 +829,7 @@ function drawControls() {
   const labels = [
     ["Growth mode", 78],
     [`Nutrient patches: ${nodeSlider.value()}`, 126],
-    [`Candidate density: ${densitySlider.value()}%`, 174],
+    [allToAllToggle.checked() ? "Candidate topology: All-to-all" : `Nearest-neighbor density: ${densitySlider.value()}%`, 174],
     [`Growth speed: ${speedSlider.value()} edges/s`, 222],
     ["Patch distribution", 270],
     [`Substrate resistance: ${resistanceSlider.value()}%`, 318],
