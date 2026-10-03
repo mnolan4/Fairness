@@ -126,7 +126,7 @@ function createControls() {
   buttons.forEach((button, i) => {
     const buttonY = i === 4 ? 526 : 442 + floor(i / 2) * 35;
     button.position(x + (i % 2) * 108, buttonY);
-    button.size(i === 4 ? 102 : 100, i === 3 ? 40 : 28);
+    button.size(i === 4 ? 102 : 100, (i === 2 || i === 3) ? 40 : 28);
     styleButton(button);
   });
   playButton.mousePressed(togglePlay);
