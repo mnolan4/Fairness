@@ -19,6 +19,7 @@ let isPlaying = true;
 let seed = 7321;
 let cHistory = [];
 let roughnessHistory = [];
+let timeHistory = [];
 let frameAccumulator = 0;
 let infoBoxOpen = false;
 
@@ -105,6 +106,7 @@ function resetSimulation() {
   });
   cHistory = [modelState.cMT];
   roughnessHistory = [0];
+  timeHistory = [0];
   frameAccumulator = 0;
 }
 
@@ -345,9 +347,11 @@ function drawSpinGate(x, y) {
 function recordHistory() {
   cHistory.push(modelState.cMT);
   roughnessHistory.push(modelState.last.metrics.roughnessDimers);
+  timeHistory.push(modelState.time);
   if (cHistory.length > 180) {
     cHistory.shift();
     roughnessHistory.shift();
+    timeHistory.shift();
   }
 }
 
@@ -355,7 +359,7 @@ function drawHistoryChart() {
   const panel = PANEL.chart;
   const left = panel.x + 42;
   const top = panel.y + 43;
-  const graphWidth = panel.w - 62;
+  const graphWidth = panel.w - 82;
   const graphHeight = panel.h - 70;
 
   fill(190, 15, 86);
@@ -365,12 +369,22 @@ function drawHistoryChart() {
   text('HISTORY', panel.x + 16, panel.y + 25);
   textStyle(NORMAL);
 
-  stroke(210, 10, 28);
-  line(left, top, left, top + graphHeight);
-  line(left, top + graphHeight, left + graphWidth, top + graphHeight);
+  const roughnessStep = Math.max(
+    1,
+    Math.ceil(Math.max(4, ...roughnessHistory) / 4)
+  );
+  const roughnessMax = roughnessStep * 4;
+
+  drawChartAxes(
+    left,
+    top,
+    graphWidth,
+    graphHeight,
+    modelState.cTotal,
+    roughnessMax
+  );
 
   drawSeries(cHistory, 0, modelState.cTotal, color(185, 68, 92), left, top, graphWidth, graphHeight);
-  const roughnessMax = Math.max(4, ...roughnessHistory);
   drawSeries(
     roughnessHistory,
     0,
@@ -392,6 +406,51 @@ function drawHistoryChart() {
   rect(panel.x + 372, panel.y + 17, 10, 3);
   fill(210, 8, 70);
   text('tip roughness', panel.x + 386, panel.y + 22);
+}
+
+function drawChartAxes(x, y, w, h, concentrationMax, roughnessMax) {
+  textSize(8);
+  textStyle(NORMAL);
+
+  for (let tick = 0; tick <= 5; tick++) {
+    const fraction = tick / 5;
+    const py = y + h - fraction * h;
+    stroke(210, 10, 23);
+    strokeWeight(1);
+    line(x, py, x + w, py);
+
+    noStroke();
+    fill(185, 48, 82);
+    textAlign(RIGHT, CENTER);
+    text(String(Math.round(concentrationMax * fraction)), x - 7, py);
+  }
+
+  for (let tick = 0; tick <= 4; tick++) {
+    const fraction = tick / 4;
+    const py = y + h - fraction * h;
+    noStroke();
+    fill(35, 62, 90);
+    textAlign(LEFT, CENTER);
+    text(String(Math.round(roughnessMax * fraction)), x + w + 7, py);
+  }
+
+  stroke(210, 10, 38);
+  line(x, y, x, y + h);
+  line(x + w, y, x + w, y + h);
+  line(x, y + h, x + w, y + h);
+
+  const startTime = timeHistory.length ? timeHistory[0] : 0;
+  const endTime = timeHistory.length ? timeHistory[timeHistory.length - 1] : 0;
+  for (let tick = 0; tick <= 4; tick++) {
+    const fraction = tick / 4;
+    const px = x + fraction * w;
+    const seconds = Math.round(startTime + (endTime - startTime) * fraction);
+    noStroke();
+    fill(210, 8, 57);
+    textAlign(CENTER, TOP);
+    text(`${seconds}s`, px, y + h + 7);
+  }
+  textAlign(LEFT);
 }
 
 function drawSeries(values, minimum, maximum, seriesColor, x, y, w, h) {
