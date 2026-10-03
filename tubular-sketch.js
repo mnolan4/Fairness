@@ -625,22 +625,30 @@ function metricLine(label, value, y) {
 
 function drawRateBars(x, y, widthValue, last) {
   const rates = [
-    { value: last.molecularGamma, hue: 185 },
-    { value: last.bath.thermalRate, hue: 42 },
-    { value: last.appliedVacuumRate, hue: 285 }
+    { label: 'Molecular', value: last.molecularGamma, hue: 185 },
+    { label: 'EM thermal', value: last.bath.thermalRate, hue: 42 },
+    { label: 'Vacuum', value: last.appliedVacuumRate, hue: 285 }
   ];
   const logs = rates.map(rate => Math.log10(Math.max(rate.value, 1e-45)));
   const maximum = Math.max(...logs);
   const minimum = Math.min(-20, ...logs);
+  const labelWidth = 58;
+  const barX = x + labelWidth;
+  const barWidth = widthValue - labelWidth;
 
   rates.forEach((rate, index) => {
     const normalized = (logs[index] - minimum) / Math.max(maximum - minimum, 1);
-    fill(210, 10, 18);
+    fill(210, 8, 62);
     noStroke();
-    rect(x, y + index * 12, widthValue, 7, 3);
+    textAlign(LEFT, CENTER);
+    textSize(8);
+    text(rate.label, x, y + index * 14 + 4);
+    fill(210, 10, 18);
+    rect(barX, y + index * 14, barWidth, 7, 3);
     fill(rate.hue, 65, 88);
-    rect(x, y + index * 12, Math.max(1, normalized * widthValue), 7, 3);
+    rect(barX, y + index * 14, Math.max(1, normalized * barWidth), 7, 3);
   });
+  textAlign(LEFT);
 }
 
 function formatField(fieldMilliTesla) {
