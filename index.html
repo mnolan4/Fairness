@@ -1,385 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AE Labs | Algorithmic Ecologies Laboratory</title>
-    <meta name="description" content="AE Labs is an interactive laboratory for exploring emergence, allocation, adaptation, fairness, diffusion, networks, and collective computational behavior.">
-    <meta property="og:title" content="AE Labs | Algorithmic Ecologies Laboratory">
-    <meta property="og:description" content="AE Labs is an interactive laboratory for exploring emergence, allocation, adaptation, fairness, diffusion, networks, and collective computational behavior.">
-    <link rel="stylesheet" href="menu.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 40px;
-            padding-top: 70px;
-            background: #1a1a1a;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        h1 {
-            color: #fff;
-            margin: 0 0 6px 0;
-            letter-spacing: 0.02em;
-        }
-        .lab-name {
-            color: #ccc;
-            margin: 0 0 10px 0;
-            font-size: 18px;
-        }
-        .subtitle {
-            color: #aaa;
-            margin-bottom: 12px;
-            font-style: italic;
-        }
-        .byline {
-            color: #bbb;
-            margin: 0 0 4px 0;
-            font-size: 14px;
-        }
-        .updated {
-            color: #888;
-            margin: 0 0 24px 0;
-            font-size: 13px;
-        }
-        .description {
-            color: #ccc;
-            line-height: 1.6;
-            margin-bottom: 24px;
-            font-size: 15px;
-        }
-        .statement {
-            background: #2a2a2a;
-            border-left: 3px solid #4a9eff;
-            padding: 20px;
-            margin-bottom: 28px;
-            color: #fff;
-            font-style: italic;
-            line-height: 1.6;
-        }
-        .statement strong {
-            color: #4a9eff;
-            font-style: normal;
-        }
-        .origin-note {
-            color: #999;
-            font-size: 14px;
-            line-height: 1.6;
-            margin: 0 0 40px 0;
-        }
-        .family {
-            margin-top: 8px;
-            margin-bottom: 36px;
-        }
-        .family h2 {
-            margin: 0 0 6px 0;
-            font-size: 18px;
-            color: #fff;
-        }
-        .family-blurb {
-            margin: 0 0 16px 0;
-            color: #aaa;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .model-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        .model-card {
-            background: #2a2a2a;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 20px;
-            text-decoration: none;
-            color: #fff;
-            transition: all 0.3s;
-        }
-        .model-card:hover {
-            background: #333;
-            border-color: #666;
-            transform: translateY(-2px);
-        }
-        .model-card h3 {
-            margin: 0 0 10px 0;
-            color: #4a9eff;
-            font-size: 20px;
-        }
-        .model-card p {
-            margin: 0;
-            color: #ccc;
-            font-size: 14px;
-        }
-        .about {
-            margin-top: 20px;
-            padding-top: 28px;
-            border-top: 1px solid #333;
-        }
-        .about h2 {
-            margin: 0 0 14px 0;
-            font-size: 18px;
-        }
-        .about p {
-            color: #ccc;
-            line-height: 1.6;
-            font-size: 15px;
-            margin: 0 0 14px 0;
-        }
-        .contributors {
-            margin-top: 8px;
-            padding-top: 28px;
-            border-top: 1px solid #333;
-        }
-        .contributors h2 {
-            margin: 0 0 14px 0;
-            font-size: 18px;
-        }
-        .contributors p {
-            color: #ccc;
-            line-height: 1.6;
-            font-size: 15px;
-            margin: 0 0 14px 0;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AE Labs | Algorithmic Ecologies Laboratory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07080a; --bg2:#0d0f13; --ink:#ece8df; --dim:#8d8a83; --faint:#3a3a3c;
+    --line:rgba(236,232,223,.12); --accent:#f2b45a;
+    --serif:'Instrument Serif',Georgia,serif; --mono:'IBM Plex Mono',ui-monospace,monospace; --sans:'IBM Plex Sans',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+
+  /* ---------- header ---------- */
+  header{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+    padding:22px clamp(20px,4vw,48px);mix-blend-mode:difference}
+  .mark{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;letter-spacing:.08em}
+  .mark svg{width:22px;height:22px}
+  nav{display:flex;gap:28px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  nav a{opacity:.75;transition:opacity .2s} nav a:hover{opacity:1}
+
+  /* ---------- hero ---------- */
+  #hero{position:relative;height:100vh;min-height:640px;overflow:hidden;
+    background:radial-gradient(ellipse 70% 60% at 55% 45%,#14161c 0%,var(--bg) 70%)}
+  #gl{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.06;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hero-copy{position:absolute;left:clamp(20px,4vw,48px);top:50%;transform:translateY(-50%);max-width:440px;pointer-events:none}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:22px}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,5.6vw,84px);line-height:.95;letter-spacing:-.01em;max-width:480px}
+  h1 em{color:var(--accent)}
+  .lede{margin-top:24px;font-size:17px;line-height:1.55;color:#bdb8ae;max-width:380px}
+  .byline{margin-top:22px;font-family:var(--mono);font-size:10.5px;line-height:1.7;letter-spacing:.06em;color:var(--dim);max-width:380px}
+
+  .card{position:absolute;right:clamp(20px,4vw,48px);bottom:clamp(28px,6vh,64px);width:min(340px,calc(100vw - 40px));
+    padding:22px 22px 18px;border:1px solid var(--line);background:rgba(10,11,14,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .card .row{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  .card .row b{font-weight:500;color:var(--c,var(--accent))}
+  .card h2{font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.05;margin:14px 0 8px}
+  .card p{font-size:14px;line-height:1.55;color:#b4afa5;min-height:44px}
+  .card .actions{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+  .open{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--c,var(--accent));display:inline-flex;gap:8px;align-items:center}
+  .open:hover{text-decoration:underline;text-underline-offset:4px}
+  .arrows{display:flex;gap:8px}
+  .arrows button{width:46px;height:46px;display:grid;place-items:center;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s}
+  .arrows button svg{width:18px;height:18px}
+  .arrows button:hover{border-color:var(--ink);background:rgba(255,255,255,.04)}
+  .fade{transition:opacity .35s ease} .fade.out{opacity:0}
+  .ticks{position:absolute;left:50%;bottom:clamp(20px,4vh,40px);transform:translateX(-50%);display:flex;gap:4px}
+  .ticks button{position:relative;width:58px;padding:12px 0 14px;border:0;background:transparent;cursor:pointer;color:var(--dim);
+    font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-align:left;transition:color .25s}
+  .ticks button::after{content:'';position:absolute;left:0;right:6px;bottom:6px;height:2px;background:var(--faint);transition:background .3s,height .3s}
+  .ticks button:hover{color:var(--ink)} .ticks button:hover::after{background:#6b6a66}
+  .ticks button.on{color:var(--ink)} .ticks button.on::after{background:var(--tc,var(--ink));height:3px}
+  .ticks button:focus-visible{outline:1px solid var(--ink);outline-offset:2px}
+  .drop{position:absolute;inset:16px;border:1px dashed rgba(242,180,90,.7);display:none;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(7,8,10,.6);pointer-events:none;z-index:5}
+  #hero.dragover .drop{display:flex}
+
+  /* ---------- sections ---------- */
+  section.block{padding:clamp(80px,12vh,140px) clamp(20px,4vw,48px);border-top:1px solid var(--line)}
+  .sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:40px;align-items:end;margin-bottom:64px}
+  .sec-head h3{font-family:var(--serif);font-weight:400;font-size:clamp(38px,4.6vw,64px);line-height:1}
+  .sec-head p{color:#aaa59b;font-size:16px;line-height:1.65;max-width:560px}
+  .intro{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:56px;margin-bottom:80px}
+  .intro .lead{font-family:var(--serif);font-size:clamp(24px,2.4vw,32px);line-height:1.3}
+  .statement{border-left:1px solid var(--line);padding-left:28px}
+  .statement .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  .statement p{font-size:15px;line-height:1.7;color:#b4afa5;margin-bottom:14px}
+  .group{display:grid;grid-template-columns:240px 1fr;gap:32px;padding:34px 0;border-top:1px solid var(--line)}
+  .group-label .n{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em}
+  .group-label h4{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1;margin:8px 0}
+  .group-label p{font-size:13px;line-height:1.55;color:var(--dim)}
+  .models{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0;padding:1px 0 0 1px}
+  .m{background:var(--bg);box-shadow:1px 0 0 var(--line),0 1px 0 var(--line),1px 1px 0 var(--line),inset 1px 0 0 var(--line),inset 0 1px 0 var(--line);margin:0 0 0 -1px;padding:20px 20px 22px;display:flex;flex-direction:column;gap:8px;min-height:132px;transition:background .25s}
+  .m:hover{background:var(--bg2)}
+  .m .t{font-size:16px;font-weight:400;display:flex;justify-content:space-between;gap:10px}
+  .m .t span{font-family:var(--mono);font-size:12px;color:var(--dim);transition:transform .25s,color .25s}
+  .m:hover .t span{transform:translateX(3px);color:var(--accent)}
+  .m .d{font-size:13px;line-height:1.55;color:var(--dim)}
+  .m .f{margin-top:auto;font-family:var(--mono);font-size:10.5px;color:#55534f;letter-spacing:.04em}
+  .about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:40px}
+  .about .body p{font-size:17px;line-height:1.7;color:#c4bfb5;margin-bottom:18px;max-width:600px}
+  .about .body > p:first-child{font-family:var(--serif);font-size:26px;line-height:1.35;color:var(--ink)}
+  .contrib{margin-top:36px;padding-top:24px;border-top:1px solid var(--line);max-width:600px}
+  .contrib .k{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+  footer{padding:28px clamp(20px,4vw,48px);border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}
+
+  @media (max-width:980px){ .ticks button{width:42px} }
+  @media (max-width:820px){
+    nav{display:none}
+    .hero-copy{top:110px;transform:none}
+    h1{font-size:42px}.lede,.byline{display:none}
+    .ticks{display:none}
+    .sec-head,.about,.group,.intro{grid-template-columns:1fr;gap:20px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
-    <div class="menu-trigger"></div>
-    <nav class="menu-bar">
-        <div class="menu-row">
-            <span class="bracket">{</span>
-            <a href="index.html" class="active">AE LABS</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="baseline.html">BASELINE</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="weighted.html">WEIGHTED</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="segregation.html">SEGREGATION</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="market.html">MARKET</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="temporal.html">TEMPORAL</a>
-            <span class="bracket">}</span>
-        </div>
-        <div class="menu-row">
-            <span class="bracket">{</span>
-            <a href="energy.html">ENERGY</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="network.html">NETWORK</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="kruskal.html">KRUSKAL</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="ecological.html">ECOLOGICAL</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="quantum.html">QUANTUM</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="consensus.html">CONSENSUS</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="coalitions.html">COALITIONS</a>
-            <span class="bracket">}</span>
-        </div>
-        <div class="menu-row">
-            <span class="bracket">{</span>
-            <a href="diffusion.html">DIFFUSION</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="stochastic.html">STOCHASTIC</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="ito.html">DUAL-ITO</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="cytoneme.html">CYTONEME</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="cytoneme-circuitry.html">CIRCUITRY</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="coupled.html">COUPLED</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="protein.html">PROTEIN</a>
-            <span class="bracket">}</span>
-            <span class="bracket">{</span>
-            <a href="rpd.html">RPD</a>
-            <span class="bracket">}</span>
-        </div>
-    </nav>
-    <div class="container">
-        <h1>AE Labs</h1>
-        <p class="lab-name">Algorithmic Ecologies Laboratory</p>
-        <p class="subtitle">Interactive models of emergence, allocation, adaptation, and collective behavior.</p>
-        <p class="byline">Matt Nolan — Department of Computer Science, University of Maryland College Park</p>
-        <p class="updated">Updated September, 2026</p>
 
-        <div class="description">
-            <p>AE Labs is an evolving collection of interactive computational experiments exploring how simple rules, local interactions, constraints, and feedback produce complex collective behavior. The project began with models of computational fairness and now extends across diffusion, networks, stochastic systems, allocation, ecological dynamics, game theory, and autonomous agents.</p>
-        </div>
+<header>
+  <a class="mark" href="#hero">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M12 12 21 7M12 12v10M12 12 3 7" opacity=".5"/></svg>
+    AE LABS
+  </a>
+  <nav><a href="#models">Models</a><a href="#about">About</a><a href="#contributors">Contributors</a></nav>
+</header>
 
-        <div class="statement">
-            <strong>Statement:</strong> AE Labs explores how local rules, constraints, incentives, and flows produce larger patterns of collective behavior. The project began as an exploration of computational fairness and has expanded into a broader study of emergent systems, allocation, adaptation, and collective dynamics.
-        </div>
+<section id="hero">
+  <canvas id="gl" aria-label="Interactive 3D views of AE Labs models"></canvas>
+  <div class="grain"></div>
 
-        <p class="origin-note">Fairness Systems remains the origin and first major research thread: early and ongoing experiments exploring equality, distribution, parity, bias, and corrective dynamics. The original model names are kept as a record of that genealogy.</p>
+  <div class="hero-copy">
+    <div class="eyebrow">AE Labs</div>
+    <h1>Algorithmic <em>Ecologies</em> Laboratory</h1>
+    <p class="lede">Interactive models of emergence, allocation, adaptation, and collective behavior.</p>
+    <p class="byline">Matt Nolan — Department of Computer Science, University of Maryland College Park<br>Updated September, 2026</p>
+  </div>
 
-        <section class="family" id="models">
-            <h2>Distribution &amp; Fairness</h2>
-            <p class="family-blurb">Early and ongoing experiments exploring equality, distribution, parity, bias, and corrective dynamics.</p>
-            <div class="model-grid">
-                <a href="baseline.html" class="model-card">
-                    <h3>Baseline Model</h3>
-                    <p>Standard fairness coefficient with full metrics and entropy tracking</p>
-                </a>
-                <a href="weighted.html" class="model-card">
-                    <h3>Weighted Fairness</h3>
-                    <p>Emphasizes weighted fairness dynamics with adjustable weight distribution</p>
-                </a>
-                <a href="market.html" class="model-card">
-                    <h3>Market Exchange</h3>
-                    <p>Resource exchange analog with trading dynamics and wealth distribution</p>
-                </a>
-                <a href="temporal.html" class="model-card">
-                    <h3>Temporal Fairness</h3>
-                    <p>Memory-based model with glowing orbs and fading trails showing fairness memory</p>
-                </a>
-                <a href="coalitions.html" class="model-card">
-                    <h3>Cooperative Game Theory</h3>
-                    <p>Coalition formation with Shapley values and Nash bargaining solutions</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="family">
-            <h2>Emergence &amp; Collective Behavior</h2>
-            <p class="family-blurb">How local preferences, influence, and interaction produce group-level structure.</p>
-            <div class="model-grid">
-                <a href="segregation.html" class="model-card">
-                    <h3>Segregation Analog</h3>
-                    <p>Schelling-like model showing local segregation patterns with fairness overlays</p>
-                </a>
-                <a href="consensus.html" class="model-card">
-                    <h3>Consensus Fairness</h3>
-                    <p>Opinion dynamics in 2D space with color blending toward consensus</p>
-                </a>
-                <a href="ecological.html" class="model-card">
-                    <h3>Ecological Fairness</h3>
-                    <p>Living terrain grid with resource-population feedback and sustainability</p>
-                </a>
-                <a href="protein.html" class="model-card">
-                    <h3>Protein Folding Fairness</h3>
-                    <p>Chain of agents fold to minimize unfairness energy like proteins finding native structure</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="family">
-            <h2>Diffusion &amp; Stochastic Systems</h2>
-            <p class="family-blurb">Flows, noise, and correction across space and time.</p>
-            <div class="model-grid">
-                <a href="diffusion.html" class="model-card">
-                    <h3>Fairness Diffusion</h3>
-                    <p>Continuous color field with ripple propagation showing fairness potential</p>
-                </a>
-                <a href="stochastic.html" class="model-card">
-                    <h3>Stochastic Ito SDE</h3>
-                    <p>Particles flow through sinusoidal waves with Brownian motion jitter</p>
-                </a>
-                <a href="ito.html" class="model-card">
-                    <h3>Dual Itô Fairness</h3>
-                    <p>Forward and reverse SDEs showing bias diffusion and fairness correction equilibrium</p>
-                </a>
-                <a href="coupled.html" class="model-card">
-                    <h3>Coupled Diffusion</h3>
-                    <p>Two competitive particle populations with coupled SDEs pushing each other apart</p>
-                </a>
-                <a href="rpd.html" class="model-card">
-                    <h3>Residual Prior Diffusion (RPD)</h3>
-                    <p>Two-stage fairness: coarse prior captures large-scale structure; diffusion refines the residual toward target (arXiv:2512.21593v1)</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="family">
-            <h2>Networks &amp; Information</h2>
-            <p class="family-blurb">Influence, conduits, and the routing of signals through structure.</p>
-            <div class="model-grid">
-                <a href="network.html" class="model-card">
-                    <h3>Information Fairness</h3>
-                    <p>Dynamic graph network where node brightness and edge thickness show influence</p>
-                </a>
-                <a href="kruskal.html" class="model-card">
-                    <h3>Kruskal’s Mycelial Network</h3>
-                    <p>Compare a minimum-biomass tree with loop-forming anastomosis, transport bias, and damage resilience</p>
-                </a>
-                <a href="cytoneme.html" class="model-card">
-                    <h3>Cytoneme-Constrained Diffusion</h3>
-                    <p>Directed graph conduits constrain resource diffusion with adaptive fairness control</p>
-                </a>
-                <a href="cytoneme-circuitry.html" class="model-card">
-                    <h3>Advanced Cytoneme Circuitry</h3>
-                    <p>Fair signal flow through fixed networks with organic circuitry visualization</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="family">
-            <h2>Energy &amp; Physical Analogies</h2>
-            <p class="family-blurb">Physical metaphors for redistribution, equilibrium, and symmetry.</p>
-            <div class="model-grid">
-                <a href="energy.html" class="model-card">
-                    <h3>Energy Redistribution</h3>
-                    <p>Thermodynamic analog with heat map visualization and temperature diffusion</p>
-                </a>
-                <a href="quantum.html" class="model-card">
-                    <h3>Quantum Symmetry</h3>
-                    <p>Probability clouds with JS divergence showing superposition fairness</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="family">
-            <h2>Tubulin &amp; Spin Dynamics</h2>
-            <p class="family-blurb">Biophysical growth coupled to a reduced radical-pair response, with thermal and vacuum channels kept distinct.</p>
-            <div class="model-grid">
-                <a href="tubular.html" class="model-card">
-                    <h3>Spin-Gated Microtubule Polymerization</h3>
-                    <p>A representative 13-protofilament tube links isotope-sensitive triplet yield to polymerization, local heterogeneity, feedback, and collective morphology</p>
-                </a>
-            </div>
-        </section>
-
-        <section class="about" id="about">
-            <h2>About</h2>
-            <p>AE Labs began as a series of interactive models exploring computational fairness. As the project developed, those experiments increasingly intersected with broader questions in dynamical systems, agent behavior, diffusion, networks, game theory, ecology, and collective decision-making.</p>
-            <p>Algorithmic Ecologies describes this expanded territory: computational environments in which agents, resources, information, constraints, and rules interact over time to produce emergent outcomes.</p>
-            <p>Fairness remains an important research thread within AE Labs, but it now sits alongside questions of equilibrium, resilience, cooperation, competition, adaptation, and systemic change. The laboratory is built so later work — including allocation, multi-agent learning, causal systems, flow matching, social choice, and artificial life — can join the same collection without replacing the original models.</p>
-        </section>
-
-        <section class="contributors" id="contributors">
-            <h2>Contributors</h2>
-            <p>Special thanks to Shuubham Ojha, PhD candidate in the A. James Clark School of Engineering, Speech Communication Laboratory, for his feedback on the models and guidance on differential equations, diffusion, and their relationship to optimization.</p>
-        </section>
-
-        <footer class="ae-footer">
-            <p><strong>AE Labs</strong> — Algorithmic Ecologies Laboratory</p>
-            <p class="ae-footer-tag">Interactive models of emergence, allocation, adaptation, and collective behavior.</p>
-        </footer>
+  <div class="card" id="card">
+    <div class="row fade" id="cRow"><b id="cCat">Distribution &amp; Fairness</b><span id="cIdx">01 / 08</span></div>
+    <h2 class="fade" id="cName">Baseline Model</h2>
+    <p class="fade" id="cDesc">Standard fairness coefficient with full metrics and entropy tracking</p>
+    <div class="actions">
+      <a class="open" id="cOpen" href="https://mnolan4.github.io/Fairness/baseline.html">Open model <span>→</span></a>
+      <div class="arrows"><button id="prev" aria-label="Previous model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20 12H4M10 6l-6 6 6 6"/></svg></button><button id="next" aria-label="Next model"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 12h16M14 6l6 6-6 6"/></svg></button></div>
     </div>
-    <script src="brand.js"></script>
+  </div>
+  <div class="ticks" id="ticks"></div>
+  <div class="drop">Release to place on the glass</div>
+</section>
+
+<section class="block" id="models">
+  <div class="intro">
+    <p class="lead">AE Labs is an evolving collection of interactive computational experiments exploring how simple rules, local interactions, constraints, and feedback produce complex collective behavior. The project began with models of computational fairness and now extends across diffusion, networks, stochastic systems, allocation, ecological dynamics, game theory, and autonomous agents.</p>
+    <div class="statement">
+      <div class="k">Statement</div>
+      <p>AE Labs explores how local rules, constraints, incentives, and flows produce larger patterns of collective behavior. The project began as an exploration of computational fairness and has expanded into a broader study of emergent systems, allocation, adaptation, and collective dynamics.</p>
+      <p>Fairness Systems remains the origin and first major research thread: early and ongoing experiments exploring equality, distribution, parity, bias, and corrective dynamics. The original model names are kept as a record of that genealogy.</p>
+    </div>
+  </div>
+  <div id="groups"></div>
+</section>
+
+<section class="block" id="about">
+  <div class="about">
+    <div class="sec-head" style="margin:0;display:block"><h3>About</h3></div>
+    <div class="body">
+      <p>AE Labs began as a series of interactive models exploring computational fairness. As the project developed, those experiments increasingly intersected with broader questions in dynamical systems, agent behavior, diffusion, networks, game theory, ecology, and collective decision-making.</p>
+      <p>Algorithmic Ecologies describes this expanded territory: computational environments in which agents, resources, information, constraints, and rules interact over time to produce emergent outcomes.</p>
+      <p>Fairness remains an important research thread within AE Labs, but it now sits alongside questions of equilibrium, resilience, cooperation, competition, adaptation, and systemic change. The laboratory is built so later work — including allocation, multi-agent learning, causal systems, flow matching, social choice, and artificial life — can join the same collection without replacing the original models.</p>
+      <div class="contrib" id="contributors">
+        <div class="k">Contributors</div>
+        <p style="font-size:16px;color:var(--ink);margin-top:4px">Matt Nolan — Department of Computer Science, University of Maryland College Park</p>
+        <p style="font-size:15px;margin-top:20px">Special thanks to Peter Lee for his feedback and advising.</p>
+        <p style="font-size:15px">Special thanks to Shuubham Ojha, PhD candidate in the A. James Clark School of Engineering, Speech Communication Laboratory, for his feedback on the models and guidance on differential equations, diffusion, and their relationship to optimization.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><span>AE Labs — Algorithmic Ecologies Laboratory</span><span>Interactive models of emergence, allocation, adaptation, and collective behavior.</span></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* =====================================================================
+   CONFIG
+   Locally (file:// or localhost) and on GitHub Pages, links are relative, so a local copy
+   only ever opens your local model pages. Only the hosted preview points at the live site.
+   To use real screenshots, set `shot` to an image path, e.g. 'shots/baseline.png'.
+   If it fails to load, the cube falls back to the live procedural sketch.
+   ===================================================================== */
+const LOCAL = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)$/.test(location.hostname) || /\.local$/.test(location.hostname);
+const BASE = (LOCAL || /github\.io$/.test(location.hostname)) ? '' : 'https://mnolan4.github.io/Fairness/';
+
+const FEATURED = [
+  {name:'Baseline Model', cat:'Distribution & Fairness', file:'baseline.html', color:'#f2b45a', sim:'baseline', shot:null,
+   desc:'Standard fairness coefficient with full metrics and entropy tracking'},
+  {name:'Segregation Analog', cat:'Emergence & Collective Behavior', file:'segregation.html', color:'#e8735a', sim:'segregation', shot:null,
+   desc:'Schelling-like model showing local segregation patterns with fairness overlays'},
+  {name:'Stochastic Ito SDE', cat:'Diffusion & Stochastic Systems', file:'stochastic.html', color:'#5ad1e8', sim:'stochastic', shot:null,
+   desc:'Particles flow through sinusoidal waves with Brownian motion jitter'},
+  {name:'Information Fairness', cat:'Networks & Information', file:'network.html', color:'#9be86a', sim:'network', shot:null,
+   desc:'Dynamic graph network where node brightness and edge thickness show influence'},
+  {name:'Fairness Diffusion', cat:'Diffusion & Stochastic Systems', file:'diffusion.html', color:'#c58cff', sim:'diffusion', shot:null,
+   desc:'Continuous color field with ripple propagation showing fairness potential'},
+  {name:'Energy Redistribution', cat:'Energy & Physical Analogies', file:'energy.html', color:'#ff7a45', sim:'energy', shot:null,
+   desc:'Thermodynamic analog with heat map visualization and temperature diffusion'},
+  {name:'Quantum Symmetry', cat:'Energy & Physical Analogies', file:'quantum.html', color:'#7aa8ff', sim:'quantum', shot:null,
+   desc:'Probability clouds with JS divergence showing superposition fairness'},
+  {name:'Kruskal’s Mycelial Network', cat:'Networks & Information', file:'kruskal.html', color:'#e8d9a0', sim:'kruskal', shot:null,
+   desc:'Compare a minimum-biomass tree with loop-forming anastomosis, transport bias, and damage resilience'},
+];
+
+const GROUPS = [
+  {title:'Distribution & Fairness', blurb:'Early and ongoing experiments exploring equality, distribution, parity, bias, and corrective dynamics.', items:[
+    ['Baseline Model','baseline.html','Standard fairness coefficient with full metrics and entropy tracking'],
+    ['Weighted Fairness','weighted.html','Emphasizes weighted fairness dynamics with adjustable weight distribution'],
+    ['Market Exchange','market.html','Resource exchange analog with trading dynamics and wealth distribution'],
+    ['Temporal Fairness','temporal.html','Memory-based model with glowing orbs and fading trails showing fairness memory'],
+    ['Cooperative Game Theory','coalitions.html','Coalition formation with Shapley values and Nash bargaining solutions']]},
+  {title:'Emergence & Collective Behavior', blurb:'How local preferences, influence, and interaction produce group-level structure.', items:[
+    ['Segregation Analog','segregation.html','Schelling-like model showing local segregation patterns with fairness overlays'],
+    ['Consensus Fairness','consensus.html','Opinion dynamics in 2D space with color blending toward consensus'],
+    ['Ecological Fairness','ecological.html','Living terrain grid with resource-population feedback and sustainability'],
+    ['Protein Folding Fairness','protein.html','Chain of agents fold to minimize unfairness energy like proteins finding native structure']]},
+  {title:'Diffusion & Stochastic Systems', blurb:'Flows, noise, and correction across space and time.', items:[
+    ['Fairness Diffusion','diffusion.html','Continuous color field with ripple propagation showing fairness potential'],
+    ['Stochastic Ito SDE','stochastic.html','Particles flow through sinusoidal waves with Brownian motion jitter'],
+    ['Dual Itô Fairness','ito.html','Forward and reverse SDEs showing bias diffusion and fairness correction equilibrium'],
+    ['Coupled Diffusion','coupled.html','Two competitive particle populations with coupled SDEs pushing each other apart'],
+    ['Residual Prior Diffusion (RPD)','rpd.html','Two-stage fairness: coarse prior captures large-scale structure; diffusion refines the residual toward target (arXiv:2512.21593v1)']]},
+  {title:'Networks & Information', blurb:'Influence, conduits, and the routing of signals through structure.', items:[
+    ['Information Fairness','network.html','Dynamic graph network where node brightness and edge thickness show influence'],
+    ['Kruskal’s Mycelial Network','kruskal.html','Compare a minimum-biomass tree with loop-forming anastomosis, transport bias, and damage resilience'],
+    ['Cytoneme-Constrained Diffusion','cytoneme.html','Directed graph conduits constrain resource diffusion with adaptive fairness control'],
+    ['Advanced Cytoneme Circuitry','cytoneme-circuitry.html','Fair signal flow through fixed networks with organic circuitry visualization']]},
+  {title:'Energy & Physical Analogies', blurb:'Physical metaphors for redistribution, equilibrium, and symmetry.', items:[
+    ['Energy Redistribution','energy.html','Thermodynamic analog with heat map visualization and temperature diffusion'],
+    ['Quantum Symmetry','quantum.html','Probability clouds with JS divergence showing superposition fairness']]},
+  {title:'Tubulin & Spin Dynamics', blurb:'Biophysical growth coupled to a reduced radical-pair response, with thermal and vacuum channels kept distinct.', items:[
+    ['Spin-Gated Microtubule Polymerization','tubular.html','A representative 13-protofilament tube links isotope-sensitive triplet yield to polymerization, local heterogeneity, feedback, and collective morphology']]},
+];
+
+/* ---------- model directory ---------- */
+(function buildGroups(){
+  const root = document.getElementById('groups');
+  root.innerHTML = GROUPS.map((g,gi)=>`
+    <div class="group">
+      <div class="group-label"><div class="n">${String(gi+1).padStart(2,'0')}</div><h4>${g.title}</h4><p>${g.blurb}</p></div>
+      <div class="models">${g.items.map(([n,f,d])=>`
+        <a class="m" href="${BASE}${f}"><div class="t">${n}<span>→</span></div><div class="d">${d}</div><div class="f">${f}</div></a>`).join('')}
+      </div>
+    </div>`).join('');
+})();
+
+/* =====================================================================
+   PROCEDURAL SKETCHES — stand-ins until real screenshots are dropped in.
+   Each draws onto a 256px canvas; fading trails give a range of
+   brightness values so each pane has depth even before real screenshots exist.
+   ===================================================================== */
+const S = 256;
+const rnd = (a=1,b)=> b===undefined ? Math.random()*a : a+Math.random()*(b-a);
+function heat(t){ t=Math.max(0,Math.min(1,t)); // dark -> red -> orange -> pale
+  const r=Math.min(1,t*2.2), g=Math.max(0,Math.min(1,(t-.35)*1.9)), b=Math.max(0,(t-.75)*3.2);
+  return [r*255|0,g*235|0,Math.min(1,b)*220|0]; }
+
+const SIMS = {
+  baseline(c){ const A=[...Array(260)].map(()=>({x:rnd(S),y:rnd(S),w:rnd(.2,1),a:rnd(6.28)}));
+    c.fillStyle='#000';c.fillRect(0,0,S,S);
+    return ()=>{ c.fillStyle='rgba(0,0,0,.09)';c.fillRect(0,0,S,S);
+      for(let k=0;k<20;k++){const p=A[rnd(A.length)|0],q=A[rnd(A.length)|0];const m=(p.w+q.w)/2;p.w+=(m-p.w)*.15;q.w+=(m-q.w)*.15;}
+      for(const p of A){p.a+=rnd(-.4,.4);p.x=(p.x+Math.cos(p.a)*.8+S)%S;p.y=(p.y+Math.sin(p.a)*.8+S)%S;
+        const l=40+p.w*55; c.fillStyle=`hsl(${30+p.w*20},90%,${l}%)`;c.beginPath();c.arc(p.x,p.y,1+p.w*2.6,0,7);c.fill();}
+      if(Math.random()<.01) A[rnd(A.length)|0].w=1; }; },
+
+  segregation(c){ const N=48,G=new Uint8Array(N*N);for(let i=0;i<G.length;i++){const r=Math.random();G[i]=r<.1?0:r<.55?1:2;}
+    const happy=i=>{const t=G[i];if(!t)return true;const x=i%N,y=i/N|0;let s=0,o=0;
+      for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){if(!dx&&!dy)continue;const v=G[((y+dy+N)%N)*N+(x+dx+N)%N];if(v===t)s++;else if(v)o++;}
+      return s>=(s+o)*.5;};
+    const cs=S/N; return ()=>{ for(let k=0;k<70;k++){const i=rnd(G.length)|0;if(G[i]&&!happy(i)){let j;do j=rnd(G.length)|0;while(G[j]);G[j]=G[i];G[i]=0;}}
+      c.fillStyle='#000';c.fillRect(0,0,S,S);
+      for(let i=0;i<G.length;i++){if(!G[i])continue;const h=happy(i);
+        c.fillStyle=G[i]===1?(h?'#ffb36b':'#7a3f24'):(h?'#5d8cc9':'#1f3150');
+        c.fillRect((i%N)*cs+.6,(i/N|0)*cs+.6,cs-1.2,cs-1.2);} }; },
+
+  stochastic(c){ const P=[...Array(700)].map(()=>({x:rnd(S),y:rnd(S)}));c.fillStyle='#000';c.fillRect(0,0,S,S);let t=0;
+    return ()=>{ t+=.01;c.fillStyle='rgba(0,0,0,.05)';c.fillRect(0,0,S,S);
+      for(const p of P){const vx=Math.sin(p.y*.035+t)*1.1+rnd(-.6,.6),vy=Math.cos(p.x*.03-t*.7)*1.1+rnd(-.6,.6);
+        p.x=(p.x+vx+S)%S;p.y=(p.y+vy+S)%S;const sp=Math.hypot(vx,vy);
+        c.fillStyle=`hsla(${185+sp*12},85%,${45+sp*18}%,.9)`;c.fillRect(p.x,p.y,1.4,1.4);} }; },
+
+  network(c){ const N=xs=>xs; const nodes=[...Array(34)].map(()=>({x:rnd(20,S-20),y:rnd(20,S-20),vx:rnd(-.2,.2),vy:rnd(-.2,.2),v:rnd()}));
+    let pulses=[]; return ()=>{ c.fillStyle='#000';c.fillRect(0,0,S,S);const E=[];
+      for(const n of nodes){n.x+=n.vx;n.y+=n.vy;if(n.x<15||n.x>S-15)n.vx*=-1;if(n.y<15||n.y>S-15)n.vy*=-1;}
+      for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const d=Math.hypot(nodes[i].x-nodes[j].x,nodes[i].y-nodes[j].y);if(d<62)E.push([i,j,d]);}
+      c.lineWidth=1;for(const [i,j,d] of E){c.strokeStyle=`rgba(110,170,90,${.55-d/140})`;c.beginPath();c.moveTo(nodes[i].x,nodes[i].y);c.lineTo(nodes[j].x,nodes[j].y);c.stroke();}
+      if(E.length&&Math.random()<.35){const e=E[rnd(E.length)|0];pulses.push({e,t:0});}
+      pulses=pulses.filter(p=>(p.t+=.03)<1);
+      for(const p of pulses){const a=nodes[p.e[0]],b=nodes[p.e[1]];c.fillStyle='#f4ffe8';c.beginPath();c.arc(a.x+(b.x-a.x)*p.t,a.y+(b.y-a.y)*p.t,2.2,0,7);c.fill();}
+      for(const n of nodes){n.v+=rnd(-.02,.02);n.v=Math.max(.1,Math.min(1,n.v));c.fillStyle=`hsl(95,70%,${35+n.v*35}%)`;c.beginPath();c.arc(n.x,n.y,2.5+n.v*3,0,7);c.fill();} }; },
+
+  diffusion(c){ const R=96,o=document.createElement('canvas');o.width=o.height=R;const oc=o.getContext('2d'),img=oc.createImageData(R,R);
+    const src=[...Array(4)].map(()=>({x:rnd(R),y:rnd(R),p:rnd(6),f:rnd(.18,.3)}));let t=0;
+    return ()=>{ t+=.05;src[0].x=R/2+Math.cos(t*.13)*28;src[0].y=R/2+Math.sin(t*.17)*28;
+      for(let y=0;y<R;y++)for(let x=0;x<R;x++){let v=0;for(const s of src){const d=Math.hypot(x-s.x,y-s.y);v+=Math.sin(d*s.f*2.2-t*1.6+s.p)*Math.exp(-d/34);}
+        v=(v/2+.5);v=Math.max(0,Math.min(1,v));v=v*v;const i=(y*R+x)*4;
+        img.data[i]=v*255;img.data[i+1]=v*v*v*230;img.data[i+2]=Math.min(255,40+v*230);img.data[i+3]=255; }
+      oc.putImageData(img,0,0);c.imageSmoothingEnabled=true;c.drawImage(o,0,0,S,S); }; },
+
+  energy(c){ const R=64,o=document.createElement('canvas');o.width=o.height=R;const oc=o.getContext('2d'),img=oc.createImageData(R,R);
+    let H=new Float32Array(R*R),B=new Float32Array(R*R);
+    return ()=>{ if(Math.random()<.12){const x=rnd(4,R-4)|0,y=rnd(4,R-4)|0;for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)H[(y+dy)*R+x+dx]=1.6;}
+      for(let y=1;y<R-1;y++)for(let x=1;x<R-1;x++){const i=y*R+x;B[i]=(H[i]*.6+(H[i-1]+H[i+1]+H[i-R]+H[i+R])*.1)*.995;}
+      [H,B]=[B,H];
+      for(let i=0;i<R*R;i++){const [r,g,b]=heat(Math.min(1,H[i]*1.3));img.data[i*4]=r;img.data[i*4+1]=g;img.data[i*4+2]=b;img.data[i*4+3]=255;}
+      oc.putImageData(img,0,0);c.imageSmoothingEnabled=true;c.drawImage(o,0,0,S,S); }; },
+
+  quantum(c){ let t=0;c.fillStyle='#000';c.fillRect(0,0,S,S);const g=()=>{let u=0;for(let i=0;i<4;i++)u+=Math.random();return (u-2)/1.15;};
+    return ()=>{ t+=.012;c.fillStyle='rgba(0,0,0,.12)';c.fillRect(0,0,S,S);
+      const C=[{x:S/2+Math.cos(t)*55,y:S/2+Math.sin(t)*40,s:22,h:220},{x:S/2+Math.cos(t+3.14)*55,y:S/2+Math.sin(t+3.14)*40,s:22,h:280},{x:S/2,y:S/2,s:10+Math.sin(t*2)*4,h:190}];
+      for(const k of C)for(let i=0;i<170;i++){const dx=g()*k.s,dy=g()*k.s,r=Math.hypot(dx,dy)/k.s;
+        c.fillStyle=`hsla(${k.h},90%,${78-r*30}%,.85)`;c.fillRect(k.x+dx,k.y+dy,1.3,1.3);} }; },
+
+  kruskal(c){ let tips=[],age=0;const seed=()=>{c.fillStyle='#000';c.fillRect(0,0,S,S);tips=[...Array(5)].map(()=>({x:S/2+rnd(-30,30),y:S/2+rnd(-30,30),a:rnd(6.28),l:0}));age=0;};seed();
+    return ()=>{ age++; if(age>700){c.fillStyle='rgba(0,0,0,.04)';c.fillRect(0,0,S,S);} if(age>820)seed();
+      const nt=[];for(const p of tips){const nx=p.x+Math.cos(p.a)*1.4,ny=p.y+Math.sin(p.a)*1.4;
+        c.strokeStyle=`rgba(232,217,160,${Math.max(.25,.9-p.l*.004)})`;c.lineWidth=Math.max(.6,2.4-p.l*.012);c.beginPath();c.moveTo(p.x,p.y);c.lineTo(nx,ny);c.stroke();
+        p.x=nx;p.y=ny;p.a+=rnd(-.25,.25);p.l++;
+        if(p.x<2||p.y<2||p.x>S-2||p.y>S-2)continue;
+        if(Math.random()<.025&&tips.length<180)nt.push({x:p.x,y:p.y,a:p.a+rnd(-1.2,1.2),l:p.l});
+        nt.push(p);}
+      tips=nt; c.fillStyle='#fffbe9';for(const p of tips)c.fillRect(p.x-1,p.y-1,2,2); }; },
+};
+
+/* =====================================================================
+   THREE.JS SCENE: one glass cube, one pane per model
+   Each pane is a sheet of glass textured with a 2D frame of a model,
+   at low-to-mid opacity, with open space between the panes.
+   Real screenshots: put them in shots/ named after the model file
+   (baseline.html -> shots/baseline.png). Any that are missing fall
+   back to the live stand-in sketch.
+   ===================================================================== */
+FEATURED.forEach(m => { if (m.shot === null) m.shot = 'shots/' + m.file.replace(/\.html$/, '.png'); });
+
+const canvas = document.getElementById('gl');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+// orthographic camera = true isometric: no perspective distortion, parallel edges stay parallel
+const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, .1, 100);
+camera.position.set(0, 0, 20);
+let VIEW_H = 6.2;   // world units visible vertically (smaller = larger cube)
+let PX = 6.2/900;   // world units per screen pixel, set on resize
+
+const PANE = 2.3;                 // pane edge length
+const SPACING = 1, OPACITY = .9;  // fixed at the former sliders' maximums
+
+const vert = `
+  varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+  void main(){
+    vUv = uv;
+    vec4 mv = modelViewMatrix * vec4(position, 1.);
+    vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz);
+    gl_Position = projectionMatrix * mv;
+  }`;
+const frag = `
+  uniform sampler2D map; uniform float alpha, sel, sheen; uniform vec3 tint;
+  varying vec2 vUv; varying vec3 vN; varying vec3 vV;
+  void main(){
+    vec4 c = texture2D(map, vUv);
+    float lum = dot(c.rgb, vec3(.299, .587, .114));
+    // glass body: dark parts of the image stay see-through, bright marks read clearly
+    float a = alpha * mix(.28, 1., smoothstep(.04, .55, lum));
+    // thin bright edge, like the polished rim of a glass sheet
+    vec2 e = abs(vUv * 2. - 1.);
+    float rim = smoothstep(.975, 1., max(e.x, e.y));
+    // a soft diagonal reflection that slides as the cube turns
+    float band = exp(-pow((vUv.x + vUv.y - sheen) * 3.2, 2.)) * .07;
+    // glancing angles look more reflective
+    float fres = pow(1. - abs(dot(normalize(vN), normalize(vV))), 3.) * .18;
+    vec3 col = c.rgb + tint * (rim * (.35 + .65 * sel)) + band + fres;
+    gl_FragColor = vec4(col, clamp(a + .035 + rim * (.25 + .55 * sel) + band + fres, 0., 1.));
+  }`;
+
+const cube = new THREE.Group(); scene.add(cube);   // positioned/oriented as a whole
+const frame = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1,1,1)),
+  new THREE.LineBasicMaterial({color:0xece8df, transparent:true, opacity:.18}));
+cube.add(frame);
+const paneGeo = new THREE.PlaneGeometry(PANE, PANE);
+
+function label(ctx, R, m, i){
+  const s = R/256;
+  ctx.save(); ctx.font = `500 ${9*s}px "IBM Plex Mono", monospace`; ctx.textBaseline = 'top';
+  ctx.fillStyle = 'rgba(0,0,0,.55)'; ctx.fillRect(8*s, 8*s, ctx.measureText(`${String(i+1).padStart(2,'0')}  ${m.name.toUpperCase()}`).width + 12*s, 17*s);
+  ctx.fillStyle = m.color; ctx.fillText(`${String(i+1).padStart(2,'0')}  ${m.name.toUpperCase()}`, 14*s, 12.5*s);
+  ctx.restore();
+}
+
+const panes = FEATURED.map((m, i) => {
+  const cv = document.createElement('canvas'); cv.width = cv.height = S;
+  const ctx = cv.getContext('2d');
+  const step = SIMS[m.sim](ctx); for (let k = 0; k < 80; k++) step();   // pre-warm so trails exist
+  const tex = new THREE.CanvasTexture(cv); tex.minFilter = THREE.LinearFilter;
+  const mat = new THREE.ShaderMaterial({vertexShader:vert, fragmentShader:frag, transparent:true, depthWrite:false, side:THREE.DoubleSide,
+    uniforms:{map:{value:tex}, alpha:{value:OPACITY}, sel:{value:0}, sheen:{value:1}, tint:{value:new THREE.Color(m.color)}}});
+  const mesh = new THREE.Mesh(paneGeo, mat); mesh.userData.i = i; cube.add(mesh);
+  const p = {m, i, cv, ctx, step, tex, mat, mesh, live:true, sel:0, lift:0};
+  label(ctx, S, m, i); tex.needsUpdate = true;
+  if (m.shot) loadImage(m.shot).then(img => applyImage(p, img)).catch(() => {});
+  return p;
+});
+
+/* ---------- screenshots ---------- */
+function loadImage(src){ return new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; }); }
+function applyImage(p, img){
+  const R = 1024, cv = document.createElement('canvas'); cv.width = cv.height = R; const x = cv.getContext('2d');
+  const s = Math.max(R/img.width, R/img.height), w = img.width*s, h = img.height*s;   // cover-crop to a square
+  x.drawImage(img, (R-w)/2, (R-h)/2, w, h);
+  label(x, R, p.m, p.i);
+  const tex = new THREE.CanvasTexture(cv);
+  tex.minFilter = THREE.LinearMipmapLinearFilter; tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  p.tex.dispose(); p.tex = tex; p.live = false; p.mat.uniforms.map.value = tex;
+}
+
+/* ---------- selection + card ---------- */
+let active = 0, autoplay = true, lastInteract = 0;
+const $ = id => document.getElementById(id);
+const ticks = $('ticks');
+FEATURED.forEach((m, i) => { const b = document.createElement('button'); b.setAttribute('aria-label', m.name); b.title = m.name; b.textContent = String(i+1).padStart(2,'0'); b.style.setProperty('--tc', m.color); b.onclick = () => { touch(); go(i); }; ticks.appendChild(b); });
+
+function setCard(i, instant){
+  const m = FEATURED[i]; const els = ['cRow','cName','cDesc'].map($);
+  const fill = () => { $('cCat').textContent = m.cat; $('cIdx').textContent = `${String(i+1).padStart(2,'0')} / ${String(FEATURED.length).padStart(2,'0')}`;
+    $('cName').textContent = m.name; $('cDesc').textContent = m.desc; $('cOpen').href = BASE + m.file;
+    $('card').style.setProperty('--c', m.color); els.forEach(e => e.classList.remove('out')); };
+  [...ticks.children].forEach((b, k) => b.classList.toggle('on', k === i));
+  if (instant) return fill();
+  els.forEach(e => e.classList.add('out')); setTimeout(fill, 220);
+}
+function go(i){ i = (i + FEATURED.length) % FEATURED.length; if (i === active) return; active = i; setCard(active); }
+function touch(){ autoplay = false; lastInteract = performance.now(); }
+$('prev').onclick = () => { touch(); go(active - 1); };
+$('next').onclick = () => { touch(); go(active + 1); };
+addEventListener('keydown', e => { if (!heroVisible) return; if (e.key === 'ArrowRight') { touch(); go(active + 1); } if (e.key === 'ArrowLeft') { touch(); go(active - 1); } });
+setCard(0, true);
+
+
+/* ---------- pointer: the view is locked; hover a pane to select it, click to open ---------- */
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+let over = false, hoverPend = null;
+const drag = null;   // rotation is locked
+// isometric from the front-right corner: turn 45° so the front and right faces show, then tilt down 35.26°
+// pitch lowered 15° from true isometric (35.26°) to about 20.26°
+const ISO_YAW = -Math.PI/4, ISO_PITCH = Math.atan(1/Math.SQRT2) - 15 * Math.PI/180;
+function pick(e){
+  const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left)/r.width*2 - 1, -(e.clientY - r.top)/r.height*2 + 1);
+  ray.setFromCamera(ndc, camera); const h = ray.intersectObjects(panes.map(p => p.mesh));
+  return h.length ? h[0].object.userData.i : -1;
+}
+canvas.addEventListener('pointermove', e => {
+  const i = pick(e); over = i >= 0; canvas.style.cursor = over ? 'pointer' : '';
+  if (over) touch();
+  if (!hoverPend || hoverPend.i !== i) hoverPend = {i, at: performance.now()};
+});
+canvas.addEventListener('click', e => { touch(); const i = pick(e); if (i < 0) return; if (i === active) location.href = BASE + FEATURED[i].file; else go(i); });
+canvas.addEventListener('pointerleave', () => { over = false; hoverPend = null; });
+
+/* ---------- drop screenshots onto the stage (several at once fill consecutive panes) ---------- */
+const hero = $('hero');
+['dragenter','dragover'].forEach(t => hero.addEventListener(t, e => { e.preventDefault(); hero.classList.add('dragover'); }));
+['dragleave','drop'].forEach(t => hero.addEventListener(t, e => { e.preventDefault(); if (t === 'drop' || e.target === hero) hero.classList.remove('dragover'); }));
+hero.addEventListener('drop', e => {
+  touch();
+  const files = [...e.dataTransfer.files].filter(f => f.type.startsWith('image/'));
+  files.forEach((f, k) => {
+    // a file named like a model (baseline.png) goes to that pane; otherwise fill from the selected pane onward
+    const byName = panes.find(p => f.name.toLowerCase().startsWith(p.m.file.replace(/\.html$/, '')));
+    const p = byName || panes[(active + k) % panes.length];
+    loadImage(URL.createObjectURL(f)).then(img => applyImage(p, img));
+  });
+});
+
+/* ---------- resize / visibility ---------- */
+function resize(){ const w = hero.clientWidth, h = hero.clientHeight; renderer.setSize(w, h, false);
+  VIEW_H = w < 820 ? 8.6 : 6.2; PX = VIEW_H / h;
+  const hh = VIEW_H/2, hw = hh * w/h;
+  camera.left = -hw; camera.right = hw; camera.top = hh; camera.bottom = -hh; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+let heroVisible = true; new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }).observe(hero);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- loop ---------- */
+const clock = new THREE.Clock(); let frameN = 0, spread = 1, lastAuto = 0;
+function tick(){
+  requestAnimationFrame(tick); if (!heroVisible) return;
+  const t = clock.getElapsedTime(), now = performance.now(); frameN++;
+  const narrow = innerWidth < 820;
+
+  // gentle autoplay through the models until someone interacts (resumes after 12s idle)
+  if (!autoplay && now - lastInteract > 12000) autoplay = true;
+  if (autoplay && !reduce && t - lastAuto > 4.5) { lastAuto = t; go(active + 1); }
+
+  // hovering a pane selects it after a short pause (avoids flicker as the selected pane lifts)
+  if (hoverPend && hoverPend.i >= 0 && !drag && now - hoverPend.at > 220) go(hoverPend.i);
+
+  // cube placement and orientation
+  cube.position.set(narrow ? 0 : 1.75 - 150 * PX, narrow ? -1.1 : -.05, 0);   // shifted 150px left, clear of the card
+  cube.rotation.set(ISO_PITCH, ISO_YAW, 0);   // Euler XYZ: yaw is applied first, then the downward tilt
+  cube.scale.setScalar(narrow ? .95 : 1.12);
+
+  // panes: evenly spaced along the cube's depth; the selected one lifts out like a slide from a rack
+  const n = panes.length;
+  spread += ((over ? 1.15 : 1) - spread) * .06;
+  // total stack depth: about 1.65 pane-widths at the fixed spacing
+  const depth = PANE * (.35 + SPACING * 1.3) * spread;
+  const gap = depth / Math.max(n - 1, 1);
+  for (const p of panes) {
+    const isA = p.i === active;
+    p.sel += ((isA ? 1 : 0) - p.sel) * .09;
+    p.mesh.position.set(0, p.sel * PANE * .16, -depth/2 + gap * p.i);
+    p.mat.uniforms.sel.value = p.sel;
+    p.mat.uniforms.alpha.value = OPACITY * (.75 + p.sel * .9);
+    p.mat.uniforms.sheen.value = 1 + Math.sin(t * .35 + p.i * .35) * 1.1;   // reflection drifts slowly across the glass
+    if (p.live && !reduce && (isA || frameN % 3 === p.i % 3)) { p.step(); label(p.ctx, S, p.m, p.i); p.tex.needsUpdate = true; }
+  }
+  frame.scale.set(PANE * 1.06, PANE * 1.06 + PANE * .16, Math.max(depth + PANE * .14, .2));
+  frame.position.y = PANE * .08;
+  renderer.render(scene, camera);
+}
+tick();
+</script>
 </body>
 </html>
